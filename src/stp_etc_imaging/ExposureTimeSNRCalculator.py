@@ -10,6 +10,7 @@ The code uses the synphot package developed by STSci.
 Link here: https://synphot.readthedocs.io/en/latest/
 """
 
+import os
 from astropy import units as u
 from synphot import units, SourceSpectrum, SpectralElement, Observation, Empirical1D
 from synphot.models import BlackBodyNorm1D, GaussianFlux1D, Box1D
@@ -38,7 +39,8 @@ import utils_config
 data_stp_wcc = config_stp_wcc.load_config_values()
 
 #   One line function prepends the support path to variable s2 if s1 is provided, else returns s2 as is.
-prepend_if_not_none = lambda s1, s2: f"{s1}{s2}" if s1 is not None else s2
+def prepend_if_not_none(s1, s2):
+    return os.path.join(s1, s2) if s1 is not None else s2
 
 ####################################
 class Observatory:
